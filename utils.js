@@ -5,10 +5,10 @@
 const setDefaults = (obj, defaults) => {
   for(var key in obj) {
     // If item is an object, create an array or object if it doesn't exist in the defaults
-    if(typeof obj[key] == "object" && typeof defaults[key] !== "object") 
+    if(typeofObject(obj[key]) && !typeofObject(defaults[key]))
       defaults[key] = Array.isArray(obj[key]) ? [] : {};
 
-    defaults[key] = (typeof obj[key] == "object" && !Array.isArray(obj[key])) ?
+    defaults[key] = (isObject(obj[key]) && !isArray(defaults[key])) ?
       // Recursively run for child for objects 
       setDefaults(obj[key], defaults[key]) :
       // Overwrite arrays, and all other data types
@@ -17,9 +17,22 @@ const setDefaults = (obj, defaults) => {
   return defaults;
 };
 
+// Returns true for objects and arrays
+const typeofObject = item => item !== null && typeof item === "object";
+
+// Returns true for arrays, but not objects
+const isArray = item => Array.isArray(item);
+
+// Returns true for objects, but not arrays
+const isObject = item => typeofObject(item) && !isArray(item);
+
+// Returns true if node is running on macOS
 const isMacOS = () => "darwin" === process.platform;
 
 module.exports = {
   setDefaults: setDefaults,
   isMacOS: isMacOS,
+  typeofObject: typeofObject,
+  isArray: isArray,
+  isObject: isObject
 };

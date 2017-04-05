@@ -7,6 +7,59 @@ const utils = require('../utils.js');
 
 
 describe('Utils', () => {
+
+  describe('#typeofObject(data)', () => {
+    it('should return true for arrays and objects', () => {
+      utils.typeofObject({})
+        .should.be.true();
+      utils.typeofObject([])
+        .should.be.true();
+    });
+    it('should return false for non-object data types', () => {
+      ["text",null,true,function(){}]
+      .forEach(input => {
+        utils.typeofObject(input).should.not.be.true();
+      });
+    })
+  });
+
+  describe('#isObject(data)', () => {
+    it('should return true for objects', () => {
+      utils.isObject({})
+        .should.be.true();
+      utils.isObject({test: false})
+        .should.be.true();
+    });
+    it('should return false for arrays', () => {
+      utils.isObject([])
+        .should.not.be.true();
+    });
+    it('should return false for all other data types', () => {
+      [ "text", false, null, function(){}]
+      .forEach(input => {
+        utils.typeofObject(input).should.not.be.true();
+      });
+    });
+  });
+
+    describe('#isArray(data)', () => {
+    it('should return true for arrays', () => {
+      utils.isArray([])
+        .should.be.true();
+      utils.isArray([false])
+        .should.be.true();
+    });
+    it('should return false for objects', () => {
+      utils.isArray({})
+        .should.not.be.true();
+    });
+    it('should return false for all other data types', () => {
+      [ "text", false, null, function(){}]
+      .forEach(input => {
+        utils.typeofObject(input).should.not.be.true();
+      });
+    });
+  });
   
   describe('#isMacOS()', () => {
     it('should return true when process is running on darwin', () => {
@@ -69,8 +122,15 @@ describe('Utils', () => {
       const overrides = {
         firstKey: { childKey2: ['newValue'] }
       };
+      const overrides2 = {
+        firstKey: { childKey2: { key: "value" } }
+      };
       setDefaults(overrides, defaultSettings).firstKey.childKey2
         .should.equal(overrides.firstKey.childKey2);
+      // Should not be an array
+      setDefaults(overrides2, defaultSettings).firstKey.childKey2
+        .should.not.be.Array();
+
     });
 
   });
