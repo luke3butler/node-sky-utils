@@ -6,13 +6,13 @@ const setDefaults = (obj, defaults) => {
   for(var key in obj) {
     // If item is an object, create an array or object if it doesn't exist in the defaults
     if(typeofObject(obj[key]) && !typeofObject(defaults[key]))
-      defaults[key] = Array.isArray(obj[key]) ? [] : {};
+      defaults[key] = isArray(obj[key]) ? [] : {};
 
     defaults[key] = (isObject(obj[key]) && !isArray(defaults[key])) ?
       // Recursively run for child for objects 
       setDefaults(obj[key], defaults[key]) :
       // Overwrite arrays, and all other data types
-      defaults[key] = obj[key];
+      obj[key];
   }
   return defaults;
 };
