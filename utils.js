@@ -30,9 +30,9 @@ const isObject = item => typeofObject(item) && !isArray(item);
 const isMacOS = () => "darwin" === process.platform;
 
 module.exports = {
-  setDefaults: setDefaults,
-  isMacOS: isMacOS,
-  typeofObject: typeofObject,
-  isArray: isArray,
-  isObject: isObject
+  setDefaults,
+  isMacOS,
+  typeofObject,
+  isArray,
+  isObject
 };
