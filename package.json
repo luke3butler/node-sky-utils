@@ -1,0 +1,19 @@
+{
+  "name": "sky-utils",
+  "version": "0.1.0",
+  "description": "Various helper functions and utilites",
+  "main": "utils.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luke3butler/node-sky-utils.git"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.2.1"
+  },
+  "engines" : { "node" : ">=4.0.0" }
+}
