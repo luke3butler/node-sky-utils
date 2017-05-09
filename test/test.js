@@ -1,12 +1,13 @@
 "use strict";
 // Testing utilities
 const should = require('should');
+const os = require('os');
 
 // Items to test
 const utils = require('../utils.js');
 
 
-describe('Utils', () => {
+describe('data type analysis', () => {
 
   describe('#typeofObject(data)', () => {
     it('should return true for arrays and objects', () => {
@@ -60,14 +61,10 @@ describe('Utils', () => {
       });
     });
   });
-  
-  describe('#isMacOS()', () => {
-    it('should return true when process is running on darwin', () => {
-      utils.isMacOS()
-        .should.equal(process.platform === "darwin");
-    });
-  });
 
+});
+
+describe('object functions', () => {
   describe('#setDefaults(overrides, defaults)', () => {
 
     const setDefaults = utils.setDefaults;
@@ -132,7 +129,39 @@ describe('Utils', () => {
         .should.not.be.Array();
 
     });
+  });
+});
 
+describe('system functions', () => {
+  
+  describe('#osIs(type)', () => {
+    it('should return true when passed the current OS as an argument', () => {
+      utils.osIs(process.platform)
+        .should.be.true();
+    });
+    it('should return false for other operating systems', () => {
+      utils.osIs(process.platform === 'darwin' ? 'linux' : 'darwin')
+        .should.be.false();
+    });
+  });
+  
+  describe('#isMacOS()', () => {
+    it('should return true when process is running on darwin', () => {
+      utils.isMacOS()
+        .should.equal(process.platform === "darwin");
+    });
+  });
+
+  describe('#isRoot()', () => {
+    it(`should return false because the test runner does not run as root`, () => {
+      utils.isRoot().should.equal(false);
+    });
+  });
+
+  describe('#currentUser', () => {
+    it(`should return the current running user`, () => {
+      utils.currentUser().should.equal(os.userInfo().username);
+    })
   });
 
 });

@@ -1,15 +1,19 @@
 'use strict';
+const os = require('os');
 
-// -- Data type functions
+// -- Data type analysis
 
-// Returns true for objects and arrays
-const typeofObject = item => item !== null && typeof item === 'object';
-
-// Returns the class - https://bonsaiden.github.io/JavaScript-Garden/#types
+// Returns the parameter's class
+// https://bonsaiden.github.io/JavaScript-Garden/#types
 const classType = item => Object.prototype.toString.call(item).slice(8, -1);
 
+// - boolean responses
+
+// Returns whether typeof === 'object'
+const typeofObject = item => item !== null && typeof item === 'object';
+
 // Check the class of an item
-const classIs = (type, item) => notEmpty(item) && classType(item) === type;
+const classIs = (type, item) => notNull(item) && classType(item) === type;
 
 // Returns true for arrays, but not objects
 const isArray = item => Array.isArray(item);
@@ -18,13 +22,24 @@ const isArray = item => Array.isArray(item);
 const isObject = item => classIs('Object', item);
 
 // Returns true if defined and not null
-const notEmpty = item => item !== undefined && item !== null;
+const notNull = item => item !== undefined && item !== null;
 
 
 // -- System functions
 
+// Check if the current operating system matches the parameter
+const osIs = type => type === process.platform;
+
 // Returns true if node is running on macOS
-const isMacOS = () => 'darwin' === process.platform;
+const isMacOS = () => osIs('darwin');
+
+// -- User info
+
+// Return the current user
+const currentUser = () => os.userInfo().username;
+
+// Is the executing user root?
+const isRoot = () => currentUser() === 'root';
 
 
 // -- Object functions
@@ -52,6 +67,9 @@ const setDefaults = (obj, defaults) => {
 module.exports = {
   setDefaults,
   isMacOS,
+  osIs,
+  currentUser,
+  isRoot,
   typeofObject,
   isArray,
   isObject,
