@@ -1,6 +1,6 @@
 {
   "name": "sky-utils",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Various helper functions and utilites",
   "main": "utils.js",
   "license": "MIT",
