@@ -5,6 +5,7 @@
   "main": "utils.js",
   "license": "MIT",
   "scripts": {
+    "build": "rollup -c build/rollup.config.js",
     "test": "mocha"
   },
   "repository": {
@@ -13,7 +14,10 @@
   },
   "devDependencies": {
     "mocha": "^3.2.0",
+    "rollup": "^2.40.0",
     "should": "^11.2.1"
   },
-  "engines" : { "node" : ">=4.0.0" }
+  "engines": {
+    "node": ">=4.0.0"
+  }
 }

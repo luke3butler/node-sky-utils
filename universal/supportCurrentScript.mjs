@@ -1,0 +1,1 @@
+export var supportCurrentScript= document.currentScript!==undefined;

@@ -1,0 +1,1 @@
+export var supportProto=!!Object.setPrototypeOf || !!Object.prototype.__proto__;

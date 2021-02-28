@@ -1,0 +1,1 @@
+export var supportSymbol = this.Symbol
