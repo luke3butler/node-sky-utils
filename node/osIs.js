@@ -1,0 +1,1 @@
+export const osIs = type => type === process.platform;
